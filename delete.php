@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "db.php";
+<<<<<<< HEAD
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     die("Unauthorized");
 }
@@ -19,6 +20,29 @@ header("Location: index.php");
 exit();
 }
 ?>
+=======
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$id = $_GET['id'] ?? null;
+
+if (!$id) {
+    header("Location: index.php");
+    exit();
+}
+
+// If user confirms deletion
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirm'])) {
+    $stmt = $conn->prepare("DELETE FROM posts WHERE id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    header("Location: index.php");
+    exit();
+}
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +54,11 @@ exit();
 <style>
     body {
         font-family: Arial, sans-serif;
+<<<<<<< HEAD
         background: linear-gradient(135deg, #dcedc1, #a3b18a); /* light green → olive brown */
+=======
+        background: #f4f6f8;
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
         margin: 0;
         padding: 0;
         display: flex;
@@ -39,15 +67,26 @@ exit();
         height: 100vh;
     }
     .confirm-box {
+<<<<<<< HEAD
         background: #f7f9f2; /* light cream container */
         padding: 30px;
         border-radius: 12px;
         box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+=======
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
         max-width: 400px;
         text-align: center;
     }
     .confirm-box h2 {
+<<<<<<< HEAD
         color: #6b705c; /* deep olive */
+=======
+        color: #ff2f92;
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
         margin-bottom: 10px;
     }
     .confirm-box p {
@@ -57,6 +96,7 @@ exit();
     .btn {
         padding: 10px 18px;
         font-size: 1rem;
+<<<<<<< HEAD
         border-radius: 6px;
         border: none;
         cursor: pointer;
@@ -78,6 +118,27 @@ exit();
     }
     .btn-cancel:hover {
         background: #a3a388;
+=======
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .btn-delete {
+        background: linear-gradient(90deg, #ff7e5f, #ff2f92);
+        color: white;
+        box-shadow: 0px 4px 10px rgba(255, 47, 146, 0.3);
+    }
+    .btn-delete:hover {
+        opacity: 0.92;
+    }
+    .btn-cancel {
+        background: #ccc;
+        color: #333;
+    }
+    .btn-cancel:hover {
+        background: #bbb;
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
     }
 </style>
 </head>
@@ -93,4 +154,8 @@ exit();
 </div>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb

@@ -8,12 +8,17 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $id = $_GET['id'] ?? null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
 if (!$id) {
     header("Location: index.php");
     exit();
 }
 
 // Fetch post
+<<<<<<< HEAD
 $stmt = $conn->prepare("SELECT * FROM posts WHERE id=?");
 $stmt->execute([$id]);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -28,12 +33,23 @@ if ($_SESSION['role'] !== 'admin' && $post['user_id'] != $_SESSION['user_id']) {
 }
 
 // Handle update
+=======
+$stmt = $conn->prepare("SELECT title, content FROM posts WHERE id=?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$stmt->bind_result($title, $content);
+$stmt->fetch();
+$stmt->close();
+
+// Update post
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_title = trim($_POST['title']);
     $new_content = trim($_POST['content']);
 
     if ($new_title && $new_content) {
         $stmt = $conn->prepare("UPDATE posts SET title=?, content=? WHERE id=?");
+<<<<<<< HEAD
         $stmt->execute([$new_title, $new_content, $id]);
         header("Location: index.php");
         exit();
@@ -132,3 +148,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+=======
+        $stmt->bind_param("ssi", $new_title, $new_content, $id);
+        $stmt->execute();
+        header("Location: index.php");
+        exit();
+    }
+}
+?>
+<h2>Edit Post</h2>
+<form method="post">
+    <input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" required><br><br>
+    <textarea name="content" required><?php echo htmlspecialchars($content); ?></textarea><br><br>
+    <button type="submit">Update Post</button>
+</form>
+<a href="index.php">Back</a>
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb

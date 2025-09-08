@@ -4,6 +4,7 @@ include "db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
+<<<<<<< HEAD
     $password = trim($_POST['password']);
 
     if (strlen($username) < 3 || strlen($password) < 5) {
@@ -20,6 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Error: Username may already exist.');</script>";
         }
     }
+=======
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+    $stmt->bind_param("ss", $username, $password);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Registration successful! You can now log in.'); window.location='login.php';</script>";
+    } else {
+        echo "<script>alert('Error: Username may already exist.');</script>";
+    }
+    $stmt->close();
+>>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
 }
 ?>
 <!DOCTYPE html>
