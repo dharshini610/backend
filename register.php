@@ -4,7 +4,6 @@ include "db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
-<<<<<<< HEAD
     $password = trim($_POST['password']);
 
     if (strlen($username) < 3 || strlen($password) < 5) {
@@ -21,19 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Error: Username may already exist.');</script>";
         }
     }
-=======
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-    $stmt->bind_param("ss", $username, $password);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Registration successful! You can now log in.'); window.location='login.php';</script>";
-    } else {
-        echo "<script>alert('Error: Username may already exist.');</script>";
-    }
-    $stmt->close();
->>>>>>> f73cb1be9298f1cfcf108d3b0841a47953db23cb
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #dcedc1, #a3b18a); /* light green to olive brown */
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -53,46 +39,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         margin: 0;
     }
     .register-container {
-        background: #fff;
+        background: white;
         padding: 30px 40px;
-        border-radius: 12px;
-        box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+        border-radius: 10px;
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
         width: 350px;
         text-align: center;
     }
     h2 {
         margin-bottom: 20px;
-        color: #6b705c; /* deep olive */
+        color: #333;
     }
     input {
         width: 100%;
         padding: 10px;
         margin: 8px 0;
-        border: 1px solid #b7b7a4;
-        border-radius: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         font-size: 1rem;
     }
     button {
         width: 100%;
         padding: 10px;
-        background: linear-gradient(90deg, #a3b18a, #6b705c); /* olive gradient */
+        background: linear-gradient(90deg, #ff7e5f, #ff2f92);
         border: none;
         color: white;
         font-size: 1rem;
-        border-radius: 6px;
+        border-radius: 5px;
         cursor: pointer;
         margin-top: 10px;
-        transition: 0.3s;
     }
     button:hover {
-        transform: scale(1.02);
         opacity: 0.9;
     }
     a {
         display: block;
         margin-top: 15px;
         text-decoration: none;
-        color: #6b705c;
+        color: #ff2f92;
     }
     a:hover {
         text-decoration: underline;

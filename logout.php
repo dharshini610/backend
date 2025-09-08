@@ -12,7 +12,7 @@ session_destroy();
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #dcedc1, #a3b18a); /* light green to olive brown */
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -20,31 +20,29 @@ session_destroy();
         margin: 0;
     }
     .logout-container {
-        background: #fff;
+        background: white;
         padding: 30px 40px;
-        border-radius: 12px;
-        box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+        border-radius: 10px;
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
         text-align: center;
         width: 350px;
     }
     h2 {
-        color: #6b705c; /* deep olive */
+        color: #333;
     }
     p {
-        color: #8d9186;
+        color: #666;
         margin: 10px 0 20px;
     }
     a {
         display: inline-block;
         padding: 10px 20px;
-        background: linear-gradient(90deg, #a3b18a, #6b705c); /* olive gradient */
+        background: linear-gradient(90deg, #ff7e5f, #ff2f92);
         color: white;
-        border-radius: 6px;
+        border-radius: 5px;
         text-decoration: none;
-        transition: 0.3s;
     }
     a:hover {
-        transform: scale(1.02);
         opacity: 0.9;
     }
 </style>
